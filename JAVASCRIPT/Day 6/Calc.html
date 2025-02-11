@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      width: 50%;
+      max-width: 300px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgb(255, 255, 255);
+      padding: 20px;
+    }
+
+    .display {
+      width: 100%;
+      height: 60px;
+      background-color: #fafafa;
+      color: #914949;
+      font-size: 2em;
+      text-align: right;
+      padding: 10px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .button {
+      background-color: #ffffff;
+      color: #000000;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 5px;
+      padding: 20px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .button:hover {
+      background-color: #da1212;
+    }
+
+    .button.operator {
+      background-color: #ff9500;
+    }
+
+    .button.operator:hover {
+      background-color: #ffaa33;
+    }
+
+    .button.equal {
+      background-color: #34c759;
+      grid-column: span 2;
+    }
+
+    .button.equal:hover {
+      background-color: #30d158;
+    }
+
+    .button.clear {
+      background-color: #ff3b30;
+    }
+
+    .button.clear:hover {
+      background-color: #ff453a;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" id="display" disabled>
+    <div class="buttons">
+      <button class="button" onclick="clearDisplay()">C</button>
+      <button class="button" onclick="clearEntry()">CE</button>
+      <button class="button" onclick="appendPercentage()">%</button>
+      <button class="button operator" onclick="appendOperator('/')">÷</button>
+      <button class="button" onclick="appendNumber(7)">7</button>
+      <button class="button" onclick="appendNumber(8)">8</button>
+      <button class="button" onclick="appendNumber(9)">9</button>
+      <button class="button operator" onclick="appendOperator('*')">×</button>
+      <button class="button" onclick="appendNumber(4)">4</button>
+      <button class="button" onclick="appendNumber(5)">5</button>
+      <button class="button" onclick="appendNumber(6)">6</button>
+      <button class="button operator" onclick="appendOperator('-')">-</button>
+      <button class="button" onclick="appendNumber(1)">1</button>
+      <button class="button" onclick="appendNumber(2)">2</button>
+      <button class="button" onclick="appendNumber(3)">3</button>
+      <button class="button operator" onclick="appendOperator('+')">+</button>
+      <button class="button" onclick="appendNumber(0)">0</button>
+      <button class="button" onclick="appendDecimal()">.</button>
+      <button class="button equal" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function appendNumber(number) {
+      display.value += number;
+    }
+
+    function appendOperator(operator) {
+      display.value += operator;
+    }
+
+    function appendDecimal() {
+      if (!display.value.includes('.')) {
+        display.value += '.';
+      }
+    }
+
+    function appendPercentage() {
+      display.value = parseFloat(display.value) / 100;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function clearEntry() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+      try {
+        display.value = eval(display.value);
+      } catch (error) {
+        display.value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
