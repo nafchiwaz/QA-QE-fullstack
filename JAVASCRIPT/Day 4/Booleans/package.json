@@ -6,7 +6,7 @@
     "scripts": {
         "test": "jest",
         "dev": "nodemon strings.js",
-        "dev": "nodemon Bank_Assign.js"
+        "dev:run": "nodemon Bank_Assign.js"
     },
     "keywords": [
         "jest",

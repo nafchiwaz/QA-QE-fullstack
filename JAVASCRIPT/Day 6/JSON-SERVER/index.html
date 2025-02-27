@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+
+            height: 100vh;
+    background-image: url(CNMBACK.jpg);
+
+    font-family: Verdana, Geneva, sans-serif;
+
+        }
+
+
+
+       .headline{
+display: flex;
+justify-content: center;
+left: 46%;
+       }
+
+        .product-container {
+            display: flex;
+            flex-direction: row;
+
+            margin-left: 8%;
+        }
+        .product-card {
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #555;
+        }
+        .product-card .price {
+            font-size: 16px;
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="headline">Product List</h1>
+    <div id="product-list" class="product-container"></div>
+
+    <script>
+     
+        fetch('db.json')
+            .then(response => response.json())
+            .then(data => {
+                const productList = document.getElementById('product-list');
+
+            
+                data.products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+
+                    productCard.innerHTML = `
+                        <h3>${product.name}</h3>
+                        <p><strong>Category:</strong> ${product.category}</p>
+                        <p><strong>Description:</strong> ${product.description}</p>
+                        <p><strong>Stock:</strong> ${product.stock}</p>
+                        <p class="price">$${product.price.toFixed(2)}</p>
+                    `;
+
+                    productList.appendChild(productCard);
+                });
+            })
+            .catch(error => console.log('Error loading JSON data: ', error));
+    </script>
+
+</body>
+</html>
